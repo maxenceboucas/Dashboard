@@ -1,0 +1,11 @@
+_homepage:
+    path: /
+    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: easyadmin, permanent: true }
+
+easy_admin_bundle:
+    resource: "@DashboardBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
