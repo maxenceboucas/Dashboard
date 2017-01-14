@@ -1,0 +1,15 @@
+easy_admin:
+    entities:
+      Tag:
+        class: DashboardBundle\Entity\Tag
+
+        list:
+            fields:
+                - name
+            actions:
+                - { name: 'edit', icon: 'pencil', label: '' }
+                - { name: 'delete', icon: 'times', label: '' }
+
+        form:
+            fields:
+                - name

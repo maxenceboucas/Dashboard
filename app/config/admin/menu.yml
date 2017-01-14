@@ -1,0 +1,5 @@
+easy_admin:
+    design:
+        menu:
+           - { label: 'Contact', entity: 'Customer', icon: 'users' }
+           - Tag

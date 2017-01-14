@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@DashboardBundle/Resources/config/services.yml" }
+    - { resource: admin/ }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -74,25 +75,3 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\User
-
-easy_admin:
-    entities:
-        Customer:
-            class: DashboardBundle\Entity\Contact
-            controller: DashboardBundle\Controller\Admin\ContactController
-            form:
-                fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information', icon: 'pencil'}
-                    - firstname
-                    - name
-                    - { type: 'group', label: 'Contact information', icon: 'phone',
-                        css_class: 'col-sm-6' }
-                    - email
-                    - { property: 'phoneNumber', label: 'Phone' }
-                    - { type: 'group', css_class: 'col-sm-12', label: 'More information'}
-                    - { property: 'tags', type: 'easyadmin_autocomplete'}
-                    - {property: tags
-                      }
-                    - { property: 'description', type: 'ckeditor' }
-        Tag:
-          class: DashboardBundle\Entity\Tag

@@ -22,6 +22,14 @@ class Contact
     private $id;
 
     /**
+     * creation datetime.
+     *
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
@@ -64,6 +72,7 @@ class Contact
     private $tags;
 
     public function __construct() {
+        $this->createdAt = new \DateTime();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

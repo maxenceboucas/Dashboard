@@ -1,0 +1,31 @@
+easy_admin:
+    entities:
+        Customer:
+            list:
+                sort: 'createdAt'
+                fields:
+                    - firstname
+                    - name
+                    - { property: 'email', type: 'email'}
+                    - { property: 'phoneNumber', type: 'tel'}
+                    - { property: 'tags' , type: 'array'}
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: '' }
+                    - { name: 'delete', icon: 'times', label: '' }
+
+            class: DashboardBundle\Entity\Contact
+            controller: DashboardBundle\Controller\Admin\ContactController
+
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information', icon: 'pencil'}
+                    - firstname
+                    - name
+                    - { type: 'group', label: 'Contact information', icon: 'phone',
+                        css_class: 'col-sm-6' }
+                    - { property: 'email', type: 'email'}
+                    - { property: 'phoneNumber', label: 'Phone'}
+                    - { type: 'group', css_class: 'col-sm-12', label: 'More information'}
+                    - { property: 'tags', type: 'collection', type_options: { entry_type: 'DashboardBundle\Entity\Tag', by_reference: false, allow_add: true },  label: '' }
+                    - {property: tags,}
+                    - { property: 'description', type: 'ckeditor' }
