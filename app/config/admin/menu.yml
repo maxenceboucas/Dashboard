@@ -1,5 +1,6 @@
 easy_admin:
     design:
         menu:
-           - { label: 'Contact', entity: 'Customer', icon: 'users' }
-           - Tag
+           - { label: 'Contact', entity: 'Customer', icon: 'users'}
+           - { entity: Tag, icon: 'tag'}
+           - { entity: 'User', icon: 'user'}
