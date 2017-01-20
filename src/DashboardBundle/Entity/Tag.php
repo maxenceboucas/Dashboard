@@ -28,18 +28,13 @@ class Tag
      */
     private $name;
 
-    /**
-     * Many Tags have Many Contacts.
-     * @ORM\ManyToMany(targetEntity="Contact", mappedBy="tags")
-     */
     private $contacts;
 
     public function __construct() {
-        $this->contacts = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function __toString() {
-        return $this->name;
+        return $this->getName();
     }
 
     /**

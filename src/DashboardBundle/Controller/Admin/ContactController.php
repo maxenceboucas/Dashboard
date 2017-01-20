@@ -9,14 +9,25 @@ class ContactController extends BaseAdminController
     {
         /* @var EntityManager */
         $em = $this->getDoctrine()->getManagerForClass($this->entity['class']);
+
+        $words = explode(",",$searchQuery);
+
         /* @var DoctrineQueryBuilder */
         $queryBuilder = $em->createQueryBuilder()
             ->select('entity')
             ->from($this->entity['class'], 'entity')
-            ->join('entity.tags', 'tags')
-            ->orWhere('LOWER(tags.name) LIKE :query')
-            ->setParameter('query', '%'.strtolower($searchQuery).'%')
-        ;
+            ->join('entity.tags', 'tags');
+
+        foreach ($words as $key=>$word) {
+          $queryBuilder
+          ->orWhere('LOWER(tags.name) LIKE :query'.strval($key))
+          ->orWhere('LOWER(entity.name) LIKE :query'.strval($key))
+          ->orWhere('LOWER(entity.firstname) LIKE :query'.strval($key))
+          ->setParameter('query'.strval($key), '%'.strtolower($word).'%');
+        }
+
+
+
         if (!empty($dqlFilter)) {
             $queryBuilder->andWhere($dqlFilter);
         }
@@ -25,4 +36,5 @@ class ContactController extends BaseAdminController
         }
         return $queryBuilder;
     }
+    
 }

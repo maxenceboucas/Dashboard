@@ -22,12 +22,12 @@ class Contact
     private $id;
 
     /**
-     * creation datetime.
+     * update datetime.
      *
      * @var \DateTime
      * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    protected $updatedAt;
 
     /**
      * @var string
@@ -65,19 +65,27 @@ class Contact
     private $description;
 
     /**
-     * Many Contacts have Many Tags.
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="contacts", cascade={"persist"})
-     * @ORM\JoinTable(name="contacts_tags")
+     * @ORM\ManyToMany(targetEntity="DashboardBundle\Entity\Tag", cascade={"persist"})
      */
     private $tags;
 
     public function __construct() {
-        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
+    }
+
     public function __toString() {
-        return $this->name;
+        return (string) $this->getName();
     }
     /**
      * Get id
@@ -212,23 +220,22 @@ class Contact
     /**
      * Add tag
      *
-     * @param \DashboardBundle\Entity\Tag $tag
+     * @param Tag $tag
      *
      * @return Contact
      */
-    public function addTag(\DashboardBundle\Entity\Tag $tag)
+    public function addTag(Tag $tag)
     {
-        $this->tags[] = $tag;
+        $this->tags->add($tag);
 
-        return $this;
     }
 
     /**
      * Remove tag
      *
-     * @param \DashboardBundle\Entity\Tag $tag
+     * @param Tag $tag
      */
-    public function removeTag(\DashboardBundle\Entity\Tag $tag)
+    public function removeTag(Tag $tag)
     {
         $this->tags->removeElement($tag);
     }

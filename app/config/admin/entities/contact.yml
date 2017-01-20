@@ -3,7 +3,7 @@ easy_admin:
         Customer:
             list:
                 title: 'Contact'
-                sort: 'createdAt'
+                sort: 'updatedAt'
                 fields:
                     - firstname
                     - name
@@ -27,6 +27,5 @@ easy_admin:
                     - { property: 'email', type: 'email'}
                     - { property: 'phoneNumber', label: 'Phone'}
                     - { type: 'group', css_class: 'col-sm-12', label: 'More information'}
-                    - { property: 'tags', type: 'collection', type_options: { entry_type: 'DashboardBundle\Entity\Tag', by_reference: false, allow_add: true },  label: '' }
-                    - {property: tags,}
+                    - {property: tags, type: 'collection'}
                     - { property: 'description', type: 'ckeditor' }
