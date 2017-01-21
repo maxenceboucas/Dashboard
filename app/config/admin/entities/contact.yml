@@ -1,6 +1,6 @@
 easy_admin:
     entities:
-        Customer:
+        Contact:
             list:
                 title: 'Contact'
                 sort: 'updatedAt'
@@ -15,7 +15,7 @@ easy_admin:
                     - { name: 'delete', icon: 'times', label: '' }
 
             class: DashboardBundle\Entity\Contact
-            controller: DashboardBundle\Controller\Admin\ContactController
+           # controller: DashboardBundle\Controller\Admin\ContactController
 
             form:
                 fields:
