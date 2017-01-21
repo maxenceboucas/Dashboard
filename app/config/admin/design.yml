@@ -3,3 +3,4 @@ easy_admin:
     design:
         form_theme:   'vertical'
         color_scheme: 'dark'
+        form_theme: ':easy_admin:custom_layout.html.twig'
