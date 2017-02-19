@@ -22,52 +22,71 @@ class Contact
     private $id;
 
     /**
+     * update datetime.
+     *
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=255)
+     * @ORM\Column(name="phoneNumber", type="string", length=255, nullable=true)
      */
-    private $tel;
+    private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * Many Contacts have Many Tags.
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="contacts")
-     * @ORM\JoinTable(name="contacts_tags")
+     * @ORM\ManyToMany(targetEntity="DashboardBundle\Entity\Tag", cascade={"persist"})
      */
     private $tags;
 
     public function __construct() {
+        $this->updatedAt = new \DateTime();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    /**
+     * Gets triggered every time on update
 
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime("now");
+    }
+
+    public function __toString() {
+        return (string) $this->getName();
+    }
     /**
      * Get id
      *
@@ -151,27 +170,27 @@ class Contact
     }
 
     /**
-     * Set tel
+     * Set phoneNumber
      *
-     * @param string $tel
+     * @param string $phoneNumber
      *
      * @return Contact
      */
-    public function setTel($tel)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->tel = $tel;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
 
     /**
-     * Get tel
+     * Get phoneNumber
      *
      * @return string
      */
-    public function getTel()
+    public function getPhoneNumber()
     {
-        return $this->tel;
+        return $this->phoneNumber;
     }
 
     /**
@@ -196,5 +215,38 @@ class Contact
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param Tag $tag
+     *
+     * @return Contact
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags->add($tag);
+
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

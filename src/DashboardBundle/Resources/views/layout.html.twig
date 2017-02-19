@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="author" content="Maxence Boucas">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Contacts</title>
+  {% block topjavascript %}
+  {% endblock %}
+  {% block stylesheet %}
+    {% stylesheets filter="cssrewrite" output="css/layout.css"
+              '@DashboardBundle/Resources/public/css/bootstrap.min.css'
+              '@DashboardBundle/Resources/public/css/font-awesome.min.css'
+              '@DashboardBundle/Resources/public/css/nprogress.css'
+              '@DashboardBundle/Resources/public/css/green.css'
+              '@DashboardBundle/Resources/public/css/custom.min.css'
+          %}
+              <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+  {% endblock %}
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+      <div class="main_container">
+        {% block navbarleft %}
+          {% include 'DashboardBundle::navbarleft.html.twig'%}
+        {% endblock %}
+        {% block navbar %}
+          {% include 'DashboardBundle::navbar.html.twig'%}
+        {% endblock %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          {% block body %}
+          {% endblock %}
+        </div>
+        <!-- /page content -->
+
+        {% block footer %}
+          {% include 'DashboardBundle::footer.html.twig'%}
+        {% endblock %}
+    </div>
+  </div>
+
+  {% block javascript %}
+      {% javascripts  '@DashboardBundle/Resources/public/js/jquery.min.js'
+                      '@DashboardBundle/Resources/public/js/bootstrap.min.js'
+                      '@DashboardBundle/Resources/public/js/fastclick.js'
+                      '@DashboardBundle/Resources/public/js/nprogress.js'
+                      '@DashboardBundle/Resources/public/js/icheck.min.js'
+                      '@DashboardBundle/Resources/public/js/custom.min.js'
+      %}
+          <script src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+  {% endblock %}
+</body>
+</html>

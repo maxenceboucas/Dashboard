@@ -17,20 +17,4 @@ class AdminController extends EasyAdminController
     {
         return parent::indexAction($request);
     }
-
-    public function createContactEntityFormBuilder(Contact $entity, $view)
-    {
-      $formBuilder = parent::createEntityFormBuilder($entity, $view);
-
-      $formBuilder->remove('tags');
-
-      $formBuilder->add('tags', CollectionType::class, array(
-        'allow_add'    => true,
-        'allow_delete' => true,
-        'by_reference' => false,
-        'entry_type' => TagType::class
-      ));
-
-      return $formBuilder;
-    }
 }

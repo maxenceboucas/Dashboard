@@ -65,8 +65,10 @@ class Contact
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="DashboardBundle\Entity\Tag", cascade={"persist"})
-     */
+    * Many Contacts have Many Tags.
+    * @ORM\ManyToMany(targetEntity="Tag", inversedBy="contacts", cascade={"persist"}, indexBy="name", fetch="EXTRA_LAZY")
+    * @ORM\JoinTable(name="contacts_tags")
+    */
     private $tags;
 
     public function __construct() {
@@ -226,9 +228,10 @@ class Contact
      */
     public function addTag(Tag $tag)
     {
-        $this->tags->add($tag);
-
+      $this->tags->add($tag);
     }
+
+
 
     /**
      * Remove tag
@@ -248,5 +251,29 @@ class Contact
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Contact
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

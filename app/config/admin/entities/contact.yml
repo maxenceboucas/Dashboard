@@ -1,6 +1,6 @@
 easy_admin:
     entities:
-        Customer:
+        Contact:
             list:
                 title: 'Contact'
                 sort: 'updatedAt'
@@ -27,5 +27,5 @@ easy_admin:
                     - { property: 'email', type: 'email'}
                     - { property: 'phoneNumber', label: 'Phone'}
                     - { type: 'group', css_class: 'col-sm-12', label: 'More information'}
-                    - {property: tags, type: 'collection'}
-                    - { property: 'description', type: 'ckeditor' }
+                    - { property: tags, type: 'collection'}
+                    - { property: 'description', type: 'ckeditor'}

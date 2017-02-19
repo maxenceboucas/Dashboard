@@ -1,6 +1,7 @@
-_homepage:
-    path: /
-    defaults: { _controller: FrameworkBundle:Redirect:redirect, route: easyadmin, permanent: true }
+dashboard:
+    resource: "@DashboardBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
 
 easy_admin_bundle:
     resource: "@DashboardBundle/Controller/AdminController.php"

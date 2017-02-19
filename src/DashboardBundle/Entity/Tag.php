@@ -28,6 +28,10 @@ class Tag
      */
     private $name;
 
+    /**
+    * Many Tags have Many Contacts.
+    * @ORM\ManyToMany(targetEntity="Contact", mappedBy="tags")
+    */
     private $contacts;
 
     public function __construct() {
@@ -36,6 +40,7 @@ class Tag
     public function __toString() {
         return $this->getName();
     }
+
 
     /**
      * Get id
@@ -80,9 +85,9 @@ class Tag
      */
     public function addContact(\DashboardBundle\Entity\Contact $contact)
     {
-        $this->contacts[] = $contact;
-
-        return $this;
+      if (!$this->contacts->contains($contact)) {
+          $this->contacts->add($contact);
+      }
     }
 
     /**

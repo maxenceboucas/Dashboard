@@ -1,0 +1,108 @@
+{% extends 'DashboardBundle::layout.html.twig' %}
+
+
+{% block stylesheet %}
+  {{ parent() }}
+  {% stylesheets filter="cssrewrite" output="css/contact.css"
+            '@DashboardBundle/Resources/public/css/dataTables/dataTables.bootstrap.min.css'
+            '@DashboardBundle/Resources/public/css/dataTables/buttons.bootstrap.min.css'
+            '@DashboardBundle/Resources/public/css/dataTables/fixedHeader.bootstrap.min.css'
+            '@DashboardBundle/Resources/public/css/dataTables/responsive.bootstrap.min.css'
+            '@DashboardBundle/Resources/public/css/dataTables/scroller.bootstrap.min.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+    </div>
+
+    <div class="title_right">
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>Contacts</h2>
+          <ul class="nav navbar-right panel_toolbox">
+          <h2><a href="{{ path('new_contact') }}">New</a></h2>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <p class="text-muted font-13 m-b-30">
+          </p>
+          <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>FirstName</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Tags</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+            {% for contact in contacts %}
+            <tr>
+              <td>
+              {{contact.firstname}}
+              </td>
+              <td>
+              {{contact.name}}
+              </td>
+              <td>
+              <a target="_blank" href="mailto:{{contact.email}}">{{contact.email}}</a>
+              </td>
+              <td>
+              <a href="tel:{{contact.phoneNumber}}">{{contact.phoneNumber}}</a>
+              </td>
+              <td>
+              {% for tag in contact.tags %}
+              {{tag.name}}
+              {% endfor %}
+              </td>
+              <td>
+              <a href="{{ path('edit_contact', {'contact': contact.id }) }}">Edit</a>
+              <a href="{{ path('delete_contact', {'contact': contact.id }) }}">Delete</a>
+              </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {% javascripts  '@DashboardBundle/Resources/public/js/dataTables/jquery.dataTables.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.bootstrap.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.buttons.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/buttons.bootstrap.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/buttons.flash.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/buttons.html5.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/buttons.print.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.fixedHeader.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.keyTable.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.responsive.min.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/responsive.bootstrap.js'
+                    '@DashboardBundle/Resources/public/js/dataTables/dataTables.scroller.min.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

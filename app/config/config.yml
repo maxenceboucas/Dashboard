@@ -75,3 +75,34 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
     user_class: AppBundle\Entity\User
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    assets:
+      font-awesome-ttf:
+        inputs: '@DashboardBundle/Resources/public/fonts/fontawesome-webfont.ttf'
+        output: '/Resources/public/fonts/fontawesome-webfont.ttf'
+      font-awesome-woff:
+        inputs: '@DashboardBundle/Resources/public/fonts/fontawesome-webfont.woff'
+        output: '/Resources/public/fonts/fontawesome-webfont.woff'
+      font-awesome-woff2:
+        inputs: '@DashboardBundle/Resources/public/fonts/fontawesome-webfont.woff2'
+        output: '/Resources/public/fonts/fontawesome-webfont.woff2'
+      glyphicons-halflings-regular-ttf:
+        inputs: '@DashboardBundle/Resources/public/fonts/glyphicons-halflings-regular.ttf'
+        output: '/Resources/public/fonts/glyphicons-halflings-regular.ttf'
+      glyphicons-halflings-regular-woff:
+        inputs: '@DashboardBundle/Resources/public/fonts/glyphicons-halflings-regular.woff'
+        output: '/Resources/public/fonts/glyphicons-halflings-regular.woff'
+      glyphicons-halflings-regular-woff2:
+        inputs: '@DashboardBundle/Resources/public/fonts/glyphicons-halflings-regular.woff2'
+        output: '/Resources/public/fonts/glyphicons-halflings-regular.woff2'
+    filters:
+        cssrewrite: ~
+
+ivory_ck_editor:
+    configs:
+        my_config:
+            toolbar: full
+            forcePasteAsPlainText: true

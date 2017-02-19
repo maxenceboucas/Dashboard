@@ -10,4 +10,17 @@ namespace DashboardBundle\Repository;
  */
 class ContactRepository extends \Doctrine\ORM\EntityRepository
 {
+  public function findAllQueryBuilder($query = '',$offset = 0, $limit = 10)
+    {
+
+      $qb = $this->createQueryBuilder('contact')->orderBy('contact.updatedAt' , 'DESC')->join('contact.tags','tags');
+      if ($query) {
+          $words = explode(",",$query);
+          foreach ($words as $key => $word) {
+            $qb ->andWhere('contact.firstname LIKE :query'.$key.' OR contact.name LIKE :query'.$key.' OR tags.name LIKE :query'.$key)
+                ->setParameter('query'.$key, '%'.$word.'%');
+          }
+      }
+      return $qb->setFirstResult( $offset )->setMaxResults( $limit );
+    }
 }
