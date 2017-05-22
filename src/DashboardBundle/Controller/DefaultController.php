@@ -16,7 +16,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-      return $this->redirectToRoute('box');
+      return $this->redirectToRoute('login');
     }
 
     /**
