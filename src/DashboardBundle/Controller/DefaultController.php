@@ -3,6 +3,8 @@ namespace DashboardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use DashboardBundle\Entity\Contact;
 use DashboardBundle\Form\ContactType;
@@ -22,15 +24,9 @@ class DefaultController extends Controller
      */
     public function boxAction(Request $request)
     {
-      if ($dir = opendir("../src/DashboardBundle/Resources/public/data")) {
-        while($file = readdir($dir)) {
-          $files[] = $file;
-        }
-        closedir($dir);
-      }
-      return $this->render('DashboardBundle:box:list.html.twig', array(
-          'files' => $files,
-      ));
+      $response = new BinaryFileResponse('../src/DashboardBundle/Resources/public/data/HEC.zip');
+      $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,'HEC.zip');
+      return $response;
     }
 
 
