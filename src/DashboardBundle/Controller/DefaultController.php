@@ -14,8 +14,25 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-      return $this->redirectToRoute('contact');
+      return $this->redirectToRoute('box');
     }
+
+    /**
+     * @Route("/box", name="box")
+     */
+    public function boxAction(Request $request)
+    {
+      if ($dir = opendir("../src/DashboardBundle/Resources/public/data")) {
+        while($file = readdir($dir)) {
+          $files[] = $file;
+        }
+        closedir($dir);
+      }
+      return $this->render('DashboardBundle:box:list.html.twig', array(
+          'files' => $files,
+      ));
+    }
+
 
     /**
      * @Route("/contact", name="contact")
