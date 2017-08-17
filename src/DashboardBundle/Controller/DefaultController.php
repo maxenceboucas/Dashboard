@@ -20,17 +20,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/box", name="box")
-     */
-    public function boxAction(Request $request)
-    {
-      $response = new BinaryFileResponse('../src/DashboardBundle/Resources/public/data/HEC.zip');
-      $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT,'HEC.zip');
-      return $response;
-    }
-
-
-    /**
      * @Route("/contact", name="contact")
      */
     public function listContactAction(Request $request)
