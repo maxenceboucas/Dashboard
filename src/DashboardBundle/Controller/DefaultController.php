@@ -16,8 +16,18 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-      return $this->redirectToRoute('login');
+        return $this->render('DashboardBundle::home.html.twig');
     }
+
+    /**
+     * @Route("/base", name="base")
+     */
+    public function boxAction(Request $request)
+    {
+        return $this->redirect('http://vps432115.ovh.net/');
+
+    }
+
 
     /**
      * @Route("/contact", name="contact")

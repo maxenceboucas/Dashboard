@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="author" content="Maxence Boucas">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Team Driver</title>
+  {% block topjavascript %}
+  {% endblock %}
+  {% block stylesheet %}
+    {% stylesheets filter="cssrewrite" output="css/layout.css"
+              '@DashboardBundle/Resources/public/css/font-awesome.min.css'
+              '@DashboardBundle/Resources/public/css/home.css'
+          %}
+              <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+  {% endblock %}
+</head>
+
+<body>
+    <div class="container body">
+        <div class="outer">
+          <div class="middle">
+            <div class="inner">
+
+                <h1> Team Driver </h1>
+                <a href="https://www.facebook.com/TeamDriverFamily/">
+                    <i class="fa fa-facebook-official fa-4x" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.linkedin.com/company-beta/11226900/">
+                    <i class="fa fa-linkedin-square fa-4x" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>

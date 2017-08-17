@@ -18,9 +18,10 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 failure_path: login_failure
             logout:       true
-            anonymous:    false
+            anonymous:    true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/contact/, role: ROLE_ADMIN }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
